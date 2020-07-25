@@ -15,6 +15,7 @@ class CreateLoginCredentialsTable extends Migration
     {
         Schema::create('login_credentials', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained();
             $table->foreignId('project_id')->constrained();
             $table->foreignId('service_id')->constrained();
             $table->string('username', 100);
