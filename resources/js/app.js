@@ -31,11 +31,29 @@ const app = new Vue({
     el: '#app',
 });
 
-// JS Vanilla
-// let passwordButton = document.querySelector('.decrypt-password');
-// passwordButton.addEventListener('click', () => alert('go'));
 
-// jquery
+// DASHBOARD
 $(document).on('click', '.decrypt-password', function() {
-    alert('go');
+
+    const id = $(this).parent().siblings('.id').text();
+
+    const that = $(this);
+
+    $.ajax({
+        url: 'decrypt-password',
+        method: 'GET',
+        data: {
+            id: id
+        },
+        success: function(response) {
+            const password = response;
+            $(that).siblings('.password').text(password);
+
+        },
+        error: function() {
+            console.log('Errore!');
+        }
+    });
+
+
 });

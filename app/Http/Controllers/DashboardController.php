@@ -99,7 +99,11 @@ class DashboardController extends Controller
         return redirect()->route('dashboard');
     }
 
-    // public function decrypt_password(Request $request) {
-    //     // code...
-    // }
+    public function decrypt_password(Request $request) {
+        $id = $request->input('id');
+        $encrypted_password = DB::table('login_credentials')->where('id', $id)->value('password');
+        $decrypted_password = Crypt::decryptString($encrypted_password);
+
+        return response()->json($decrypted_password);
+    }
 }

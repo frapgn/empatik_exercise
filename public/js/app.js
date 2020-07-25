@@ -49752,13 +49752,25 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 
 var app = new Vue({
   el: '#app'
-}); // JS Vanilla
-// let passwordButton = document.querySelector('.decrypt-password');
-// passwordButton.addEventListener('click', () => alert('go'));
-// jquery
+}); // DASHBOARD
 
 $(document).on('click', '.decrypt-password', function () {
-  alert('go');
+  var id = $(this).parent().siblings('.id').text();
+  var that = $(this);
+  $.ajax({
+    url: 'decrypt-password',
+    method: 'GET',
+    data: {
+      id: id
+    },
+    success: function success(response) {
+      var password = response;
+      $(that).siblings('.password').text(password);
+    },
+    error: function error() {
+      console.log('Errore!');
+    }
+  });
 });
 
 /***/ }),
