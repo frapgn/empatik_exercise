@@ -2,25 +2,34 @@
 
 @section('content')
 <div class="container">
-    <form action="{{route('dashboard.store')}}" method="POST" autocomplete="off">
+    <form class="empatik-form" action="{{route('dashboard.store')}}" method="POST" autocomplete="off">
         @method("POST")
         @csrf
-        <input type="text" name="project" placeholder="project" value="{{old('project')}}">
+        <div class="input-container">
+            <input type="text" name="project" id="project-input" placeholder="project" value="{{old('project')}}">
+            <div id="projectList"></div>
+        </div>
         @error('project')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
 
-        <input type="text" name="service" placeholder="service" value="{{old('service')}}">
+        <div class="input-container">
+            <input type="text" name="service" placeholder="service" value="{{old('service')}}">
+        </div>
         @error('service')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
 
-        <input type="text" name="username" placeholder="username" value="{{old('username')}}">
+        <div class="input-container">
+            <input type="text" name="username" placeholder="username" value="{{old('username')}}">
+        </div>
         @error('username')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
 
-        <input type="password" name="password" placeholder="password">
+        <div class="input-container">
+            <input type="password" name="password" placeholder="password">
+        </div>
         @error('password')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror

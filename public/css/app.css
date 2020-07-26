@@ -10928,3 +10928,64 @@ a.text-dark:focus {
   }
 }
 
+.empatik-form {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.empatik-form input {
+  height: 40px;
+  width: 100%;
+  padding-left: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.empatik-form input[type=submit] {
+  background-color: rgba(144, 238, 144, 0.7);
+}
+
+.empatik-form input[type=submit]:hover {
+  background-color: lightgreen;
+}
+
+.input-container {
+  position: relative;
+  padding-bottom: 10px;
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .input-container {
+    width: 50%;
+  }
+
+  .input-container:nth-child(2n+1) {
+    padding-right: 10px;
+  }
+}
+
+#projectList {
+  display: none;
+  position: absolute;
+  top: 41px;
+  left: 0;
+  z-index: 5;
+  width: calc(100% - 10px);
+  max-height: 300px;
+  overflow: auto;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 3px #ccc;
+}
+
+#projectList .result-item {
+  padding: 5px 10px;
+}
+
+#projectList .result-item:hover {
+  cursor: pointer;
+  background-color: #c0c0c0;
+}
+

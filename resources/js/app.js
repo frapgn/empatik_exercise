@@ -32,7 +32,7 @@ const app = new Vue({
 });
 
 
-// DASHBOARD
+// DECRYPT PASSWORD ON CLICK
 $(document).on('click', '.decrypt-password', function() {
 
     const id = $(this).parent().siblings('.id').text();
@@ -40,7 +40,7 @@ $(document).on('click', '.decrypt-password', function() {
     const that = $(this);
 
     $.ajax({
-        url: 'decrypt-password',
+        url: '/decrypt-password',
         method: 'GET',
         data: {
             id: id
@@ -54,6 +54,54 @@ $(document).on('click', '.decrypt-password', function() {
             console.log('Errore!');
         }
     });
+});
+
+// AUTOCOMPLETE
+$('#project-input').keyup( function() {
+    let query = $(this).val();
+    if (query != '') {
+
+        const _token = $('meta[name=csrf-token]').attr('content');
+        $.ajax({
+            url: '/autocomplete/fetch',
+            method: 'POST',
+            data: {
+                query: query,
+                _token: _token
+            },
+            success: function(projects) {
+                $('#projectList').fadeIn();
+                $('#projectList').empty();
+                projects.forEach((project) => {
+                    $('#projectList').append(`<div class="result-item">${project.name}</div>`);
+                });
 
 
+            },
+            error: function() {
+                console.log('Errore!');
+            }
+        });
+    } else {
+        $('#projectList').fadeOut();
+        setTimeout(() => { $('#projectList').empty() }, 2000);
+
+    }
+});
+
+// al click su un risultato inseriscilo nell'input e chiudi la lista dei risultati
+$(document).on('click', '.result-item', function() {
+    $('#project-input').val($(this).text());
+    $('#projectList').fadeOut();
+});
+
+// chiudi la lista dei risultati quando si clicca all'esterno di essa
+var specifiedElement = document.getElementById('projectList');
+
+document.addEventListener('click', function(event) {
+  var isClickInside = specifiedElement.contains(event.target);
+
+  if (!isClickInside) {
+    $('#projectList').fadeOut();
+  }
 });
