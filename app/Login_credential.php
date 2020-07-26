@@ -18,4 +18,9 @@ class Login_credential extends Model
     {
         return $this->belongsTo('App\Project');
     }
+
+    public function credentials_requests()
+    {
+        return $this->hasMany('App\Credentials_request');
+    }
 }

@@ -15,7 +15,6 @@ class AutocompleteController extends Controller
                     ->where('name', 'like', "{$query}%")
                     ->get();
 
-            // dd($request->input('query'),$data);
             return response()->json($data);
         }
     }

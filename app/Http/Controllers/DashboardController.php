@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Crypt;
 use App\Login_credential;
 use App\Service;
 use App\Project;
+use App\Credentials_request;
 
 class DashboardController extends Controller
 {
@@ -99,10 +100,17 @@ class DashboardController extends Controller
         return redirect()->route('dashboard');
     }
 
+    // decifro la password richiesta
     public function decrypt_password(Request $request) {
         $id = $request->input('id');
         $encrypted_password = DB::table('login_credentials')->where('id', $id)->value('password');
         $decrypted_password = Crypt::decryptString($encrypted_password);
+
+        // Registro ne DB le info della richiesta
+        $credentials_request = new Credentials_request;
+        $credentials_request->user_id = Auth::id();
+        $credentials_request->login_credential_id = $id;
+        $credentials_request->save();
 
         return response()->json($decrypted_password);
     }

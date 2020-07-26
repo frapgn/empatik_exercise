@@ -52,4 +52,10 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Login_credential');
     }
+
+    public function credentials_requests()
+    {
+        return $this->hasMany('App\Credentials_request');
+    }
+
 }
