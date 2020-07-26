@@ -49752,72 +49752,76 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 
 var app = new Vue({
   el: '#app'
-}); // DECRYPT PASSWORD ON CLICK
+});
+$(document).ready(function () {
+  // DATATABLE LIBRARY
+  $('#myTable').DataTable(); // DECRYPT PASSWORD ON CLICK
 
-$(document).on('click', '.decrypt-password', function () {
-  var id = $(this).parent().siblings('.id').text();
-  var that = $(this);
-  $.ajax({
-    url: '/decrypt-password',
-    method: 'GET',
-    data: {
-      id: id
-    },
-    success: function success(response) {
-      var password = response;
-      $(that).siblings('.password').text(password);
-    },
-    error: function error() {
-      console.log('Errore!');
-    }
-  });
-}); // AUTOCOMPLETE
-
-$('#project-input').keyup(function () {
-  var query = $(this).val();
-
-  if (query != '') {
-    var _token = $('meta[name=csrf-token]').attr('content');
-
+  $(document).on('click', '.decrypt-password', function () {
+    var id = $(this).parent().siblings('.id').text();
+    var that = $(this);
     $.ajax({
-      url: '/autocomplete/fetch',
-      method: 'POST',
+      url: '/decrypt-password',
+      method: 'GET',
       data: {
-        query: query,
-        _token: _token
+        id: id
       },
-      success: function success(projects) {
-        $('#projectList').fadeIn();
-        $('#projectList').empty();
-        projects.forEach(function (project) {
-          $('#projectList').append("<div class=\"result-item\">".concat(project.name, "</div>"));
-        });
+      success: function success(response) {
+        var password = response;
+        $(that).siblings('.password').text(password);
       },
       error: function error() {
         console.log('Errore!');
       }
     });
-  } else {
+  }); // AUTOCOMPLETE
+
+  $('#project-input').keyup(function () {
+    var query = $(this).val();
+
+    if (query != '') {
+      var _token = $('meta[name=csrf-token]').attr('content');
+
+      $.ajax({
+        url: '/autocomplete/fetch',
+        method: 'POST',
+        data: {
+          query: query,
+          _token: _token
+        },
+        success: function success(projects) {
+          $('#projectList').fadeIn();
+          $('#projectList').empty();
+          projects.forEach(function (project) {
+            $('#projectList').append("<div class=\"result-item\">".concat(project.name, "</div>"));
+          });
+        },
+        error: function error() {
+          console.log('Errore!');
+        }
+      });
+    } else {
+      $('#projectList').fadeOut();
+      setTimeout(function () {
+        $('#projectList').empty();
+      }, 2000);
+    }
+  }); // al click su un risultato inseriscilo nell'input e chiudi la lista dei risultati
+
+  $(document).on('click', '.result-item', function () {
+    $('#project-input').val($(this).text());
     $('#projectList').fadeOut();
-    setTimeout(function () {
-      $('#projectList').empty();
-    }, 2000);
-  }
-}); // al click su un risultato inseriscilo nell'input e chiudi la lista dei risultati
+  }); // chiudi la lista dei risultati quando si clicca all'esterno di essa
 
-$(document).on('click', '.result-item', function () {
-  $('#project-input').val($(this).text());
-  $('#projectList').fadeOut();
-}); // chiudi la lista dei risultati quando si clicca all'esterno di essa
+  var specifiedElement = document.getElementById('project-input-container');
+  document.addEventListener('click', function (event) {
+    var isClickInside = specifiedElement.contains(event.target);
 
-var specifiedElement = document.getElementById('project-input-container');
-document.addEventListener('click', function (event) {
-  var isClickInside = specifiedElement.contains(event.target);
-
-  if (!isClickInside) {
-    $('#projectList').fadeOut();
-  }
-});
+    if (!isClickInside) {
+      $('#projectList').fadeOut();
+    }
+  });
+}); // END $(document).ready()
 
 /***/ }),
 

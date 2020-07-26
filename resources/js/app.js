@@ -32,76 +32,85 @@ const app = new Vue({
 });
 
 
-// DECRYPT PASSWORD ON CLICK
-$(document).on('click', '.decrypt-password', function() {
 
-    const id = $(this).parent().siblings('.id').text();
+$(document).ready( function () {
 
-    const that = $(this);
+    // DATATABLE LIBRARY
+    $('#myTable').DataTable();
 
-    $.ajax({
-        url: '/decrypt-password',
-        method: 'GET',
-        data: {
-            id: id
-        },
-        success: function(response) {
-            const password = response;
-            $(that).siblings('.password').text(password);
+    // DECRYPT PASSWORD ON CLICK
+    $(document).on('click', '.decrypt-password', function() {
 
-        },
-        error: function() {
-            console.log('Errore!');
-        }
-    });
-});
+        const id = $(this).parent().siblings('.id').text();
 
-// AUTOCOMPLETE
-$('#project-input').keyup( function() {
-    let query = $(this).val();
-    if (query != '') {
+        const that = $(this);
 
-        const _token = $('meta[name=csrf-token]').attr('content');
         $.ajax({
-            url: '/autocomplete/fetch',
-            method: 'POST',
+            url: '/decrypt-password',
+            method: 'GET',
             data: {
-                query: query,
-                _token: _token
+                id: id
             },
-            success: function(projects) {
-                $('#projectList').fadeIn();
-                $('#projectList').empty();
-                projects.forEach((project) => {
-                    $('#projectList').append(`<div class="result-item">${project.name}</div>`);
-                });
-
+            success: function(response) {
+                const password = response;
+                $(that).siblings('.password').text(password);
 
             },
             error: function() {
                 console.log('Errore!');
             }
         });
-    } else {
+    });
+
+    // AUTOCOMPLETE
+    $('#project-input').keyup( function() {
+        let query = $(this).val();
+        if (query != '') {
+
+            const _token = $('meta[name=csrf-token]').attr('content');
+            $.ajax({
+                url: '/autocomplete/fetch',
+                method: 'POST',
+                data: {
+                    query: query,
+                    _token: _token
+                },
+                success: function(projects) {
+                    $('#projectList').fadeIn();
+                    $('#projectList').empty();
+                    projects.forEach((project) => {
+                        $('#projectList').append(`<div class="result-item">${project.name}</div>`);
+                    });
+
+
+                },
+                error: function() {
+                    console.log('Errore!');
+                }
+            });
+        } else {
+            $('#projectList').fadeOut();
+            setTimeout(() => { $('#projectList').empty() }, 2000);
+
+        }
+    });
+
+    // al click su un risultato inseriscilo nell'input e chiudi la lista dei risultati
+    $(document).on('click', '.result-item', function() {
+        $('#project-input').val($(this).text());
         $('#projectList').fadeOut();
-        setTimeout(() => { $('#projectList').empty() }, 2000);
+    });
 
-    }
-});
+    // chiudi la lista dei risultati quando si clicca all'esterno di essa
+    var specifiedElement = document.getElementById('project-input-container');
 
-// al click su un risultato inseriscilo nell'input e chiudi la lista dei risultati
-$(document).on('click', '.result-item', function() {
-    $('#project-input').val($(this).text());
-    $('#projectList').fadeOut();
-});
+    document.addEventListener('click', function(event) {
+      var isClickInside = specifiedElement.contains(event.target);
 
-// chiudi la lista dei risultati quando si clicca all'esterno di essa
-var specifiedElement = document.getElementById('project-input-container');
+      if (!isClickInside) {
+        $('#projectList').fadeOut();
+      }
+    });
 
-document.addEventListener('click', function(event) {
-  var isClickInside = specifiedElement.contains(event.target);
 
-  if (!isClickInside) {
-    $('#projectList').fadeOut();
-  }
-});
+}); // END $(document).ready()

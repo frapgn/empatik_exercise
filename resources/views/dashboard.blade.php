@@ -37,13 +37,15 @@
         <input type="submit" value="Inserisci">
     </form>
 
-    <table class="dashboard-table">
+    <table id="myTable" class="dashboard-table">
         <thead>
-            <th>ID</th>
-            <th>Project</th>
-            <th>Service</th>
-            <th>Username</th>
-            <th>Password</th>
+            <tr>
+                <th>ID</th>
+                <th>Project</th>
+                <th>Service</th>
+                <th>Username</th>
+                <th>Password</th>
+            </tr>
         </thead>
         <tbody>
             @foreach ($login_credentials as $key => $login_credential)
@@ -56,7 +58,6 @@
                 </tr>
             @endforeach
         </tbody>
-
     </table>
 
 
