@@ -5,7 +5,7 @@
     <form class="empatik-form" action="{{route('dashboard.store')}}" method="POST" autocomplete="off">
         @method("POST")
         @csrf
-        <div class="input-container">
+        <div class="input-container" id="project-input-container">
             <input type="text" name="project" id="project-input" placeholder="project" value="{{old('project')}}">
             <div id="projectList"></div>
         </div>

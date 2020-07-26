@@ -96,7 +96,7 @@ $(document).on('click', '.result-item', function() {
 });
 
 // chiudi la lista dei risultati quando si clicca all'esterno di essa
-var specifiedElement = document.getElementById('projectList');
+var specifiedElement = document.getElementById('project-input-container');
 
 document.addEventListener('click', function(event) {
   var isClickInside = specifiedElement.contains(event.target);
