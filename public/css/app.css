@@ -10970,6 +10970,30 @@ a.text-dark:focus {
   }
 }
 
+.password-input-container {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  height: 40px;
+}
+
+#password-input {
+  width: calc(100% - 40px);
+  border-width: 0px;
+  height: 100%;
+}
+
+.eye-span {
+  cursor: pointer;
+  display: inline-block;
+  height: 40px;
+  width: 25px;
+}
+
+.svg-open-eye {
+  display: none;
+}
+
 #projectList {
   display: none;
   position: absolute;
@@ -10992,5 +11016,9 @@ a.text-dark:focus {
 #projectList .result-item:hover {
   cursor: pointer;
   background-color: #c0c0c0;
+}
+
+.error-message {
+  color: red;
 }
 

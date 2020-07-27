@@ -118,5 +118,15 @@ $(document).ready( function () {
       }
     });
 
+    // SHOW-HIDDEN PASWORD INPUT
+    $('.eye-span').on('click', function () {
+        if ($('#password-input').prop('type') == 'password') {
+            $('#password-input').prop('type', 'text');
+        } else {
+            $('#password-input').prop('type', 'password');
+        }
+        $('.svg-closed-eye').toggle();
+        $('.svg-open-eye').toggle();
+    });
 
 }); // END $(document).ready()
