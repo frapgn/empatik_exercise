@@ -41,7 +41,8 @@ $(document).ready( function () {
     $('#myTable').DataTable({
         scrollY:400,
         scrollX: true,
-        scrollCollapse: true
+        scrollCollapse: true,
+        // paging: false
     });
 
     // DECRYPT PASSWORD ON CLICK
@@ -83,7 +84,8 @@ $(document).ready( function () {
                 },
                 success: function(projects) {
                     if (projects.length != 0) {
-                        $('#projectList').fadeIn();
+                        // $('#projectList').fadeIn();
+                        $('#projectList').show();
                         $('#projectList').empty();
                         projects.forEach((project) => {
                             $('#projectList').append(`<div class="result-item">${project.name}</div>`);
@@ -95,8 +97,9 @@ $(document).ready( function () {
                 }
             });
         } else {
-            $('#projectList').fadeOut();
-            setTimeout(() => { $('#projectList').empty() }, 2000);
+            // $('#projectList').fadeOut();
+            $('#projectList').hide();
+            setTimeout(() => { $('#projectList').empty() }, 1000); // per essere sicuri
 
         }
     });
@@ -104,7 +107,8 @@ $(document).ready( function () {
     // al click su un risultato inseriscilo nell'input e chiudi la lista dei risultati
     $(document).on('click', '.result-item', function() {
         $('#project-input').val($(this).text());
-        $('#projectList').fadeOut();
+        // $('#projectList').fadeOut();
+        $('#projectList').hide();
     });
 
     // chiudi la lista dei risultati quando si clicca all'esterno di essa
@@ -114,7 +118,8 @@ $(document).ready( function () {
       var isClickInside = specifiedElement.contains(event.target);
 
       if (!isClickInside) {
-        $('#projectList').fadeOut();
+        // $('#projectList').fadeOut();
+        $('#projectList').hide();
       }
     });
 

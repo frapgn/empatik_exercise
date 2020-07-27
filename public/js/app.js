@@ -49759,7 +49759,8 @@ $(document).ready(function () {
   $('#myTable').DataTable({
     scrollY: 400,
     scrollX: true,
-    scrollCollapse: true
+    scrollCollapse: true // paging: false
+
   }); // DECRYPT PASSWORD ON CLICK
 
   $(document).on('click', '.decrypt-password', function () {
@@ -49796,7 +49797,8 @@ $(document).ready(function () {
         },
         success: function success(projects) {
           if (projects.length != 0) {
-            $('#projectList').fadeIn();
+            // $('#projectList').fadeIn();
+            $('#projectList').show();
             $('#projectList').empty();
             projects.forEach(function (project) {
               $('#projectList').append("<div class=\"result-item\">".concat(project.name, "</div>"));
@@ -49808,16 +49810,18 @@ $(document).ready(function () {
         }
       });
     } else {
-      $('#projectList').fadeOut();
+      // $('#projectList').fadeOut();
+      $('#projectList').hide();
       setTimeout(function () {
         $('#projectList').empty();
-      }, 2000);
+      }, 1000); // per essere sicuri
     }
   }); // al click su un risultato inseriscilo nell'input e chiudi la lista dei risultati
 
   $(document).on('click', '.result-item', function () {
-    $('#project-input').val($(this).text());
-    $('#projectList').fadeOut();
+    $('#project-input').val($(this).text()); // $('#projectList').fadeOut();
+
+    $('#projectList').hide();
   }); // chiudi la lista dei risultati quando si clicca all'esterno di essa
 
   var specifiedElement = document.getElementById('project-input-container');
@@ -49825,7 +49829,8 @@ $(document).ready(function () {
     var isClickInside = specifiedElement.contains(event.target);
 
     if (!isClickInside) {
-      $('#projectList').fadeOut();
+      // $('#projectList').fadeOut();
+      $('#projectList').hide();
     }
   }); // SHOW-HIDDEN PASWORD INPUT
 
