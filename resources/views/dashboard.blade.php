@@ -78,8 +78,8 @@
                     <td> {{$login_credential->username}} </td>
                     <td class="td-password"> <span class="password">&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;</span> </td>
                     <td>
-                        <button class="show-password" type="button">Show Password</button>
-                        <button class="hide-password" type="button">Hide Password</button>
+                        <button class="show-password" type="button">Show</button>
+                        <button class="hide-password" type="button">Hide</button>
 
                     </td>
                 </tr>

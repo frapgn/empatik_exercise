@@ -11018,6 +11018,12 @@ a.text-dark:focus {
   color: red;
 }
 
+thead,
+tfoot {
+  color: #3490dc;
+  font-weight: 700;
+}
+
 .show-password {
   border: none;
   border-radius: 5px;
