@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container mb-3 mt-3">
     <form class="empatik-form" action="{{route('dashboard.store')}}" method="POST" autocomplete="off">
         @method("POST")
         @csrf
@@ -37,7 +37,7 @@
         <input type="submit" value="Inserisci">
     </form>
 
-    <table id="myTable" class="dashboard-table">
+    <table id="myTable" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
                 <th>ID</th>
@@ -45,21 +45,32 @@
                 <th>Service</th>
                 <th>Username</th>
                 <th>Password</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
             @foreach ($login_credentials as $key => $login_credential)
                 <tr>
-                    <td class="id"> {{$login_credential->id}} </td>
+                    <td class="td-id"> {{$login_credential->id}} </td>
                     <td> {{$login_credential->project->name}} </td>
                     <td> {{$login_credential->service->name}} </td>
                     <td> {{$login_credential->username}} </td>
-                    <td> <span class="password">&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;</span> <button class="decrypt-password" type="button">View Password</button> </td>
+                    <td class="td-password"> <span class="password">&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;</span> </td>
+                    <td> <button class="decrypt-password" type="button">View Password</button> </td>
                 </tr>
             @endforeach
         </tbody>
+        <tfoot>
+            <tr>
+                <th>ID</th>
+                <th>Project</th>
+                <th>Service</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th></th>
+            </tr>
+        </tfoot>
     </table>
-
 
 </div>
 @endsection

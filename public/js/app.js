@@ -49752,13 +49752,18 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 
 var app = new Vue({
   el: '#app'
-});
+}); // var Tabulator = require('tabulator-tables');
+
 $(document).ready(function () {
   // DATATABLE LIBRARY
-  $('#myTable').DataTable(); // DECRYPT PASSWORD ON CLICK
+  $('#myTable').DataTable({
+    scrollY: 400,
+    scrollX: true,
+    scrollCollapse: true
+  }); // DECRYPT PASSWORD ON CLICK
 
   $(document).on('click', '.decrypt-password', function () {
-    var id = $(this).parent().siblings('.id').text();
+    var id = $(this).parent().siblings('.td-id').text();
     var that = $(this);
     $.ajax({
       url: '/decrypt-password',
@@ -49768,7 +49773,7 @@ $(document).ready(function () {
       },
       success: function success(response) {
         var password = response;
-        $(that).siblings('.password').text(password);
+        $(that).parent().siblings('.td-password').children('.password').text(password);
       },
       error: function error() {
         console.log('Errore!');
@@ -49790,11 +49795,13 @@ $(document).ready(function () {
           _token: _token
         },
         success: function success(projects) {
-          $('#projectList').fadeIn();
-          $('#projectList').empty();
-          projects.forEach(function (project) {
-            $('#projectList').append("<div class=\"result-item\">".concat(project.name, "</div>"));
-          });
+          if (projects.length != 0) {
+            $('#projectList').fadeIn();
+            $('#projectList').empty();
+            projects.forEach(function (project) {
+              $('#projectList').append("<div class=\"result-item\">".concat(project.name, "</div>"));
+            });
+          }
         },
         error: function error() {
           console.log('Errore!');

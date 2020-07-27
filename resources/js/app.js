@@ -32,16 +32,22 @@ const app = new Vue({
 });
 
 
+// var Tabulator = require('tabulator-tables');
+
 
 $(document).ready( function () {
 
     // DATATABLE LIBRARY
-    $('#myTable').DataTable();
+    $('#myTable').DataTable({
+        scrollY:400,
+        scrollX: true,
+        scrollCollapse: true
+    });
 
     // DECRYPT PASSWORD ON CLICK
     $(document).on('click', '.decrypt-password', function() {
 
-        const id = $(this).parent().siblings('.id').text();
+        const id = $(this).parent().siblings('.td-id').text();
 
         const that = $(this);
 
@@ -53,7 +59,7 @@ $(document).ready( function () {
             },
             success: function(response) {
                 const password = response;
-                $(that).siblings('.password').text(password);
+                $(that).parent().siblings('.td-password').children('.password').text(password);
 
             },
             error: function() {
@@ -76,13 +82,13 @@ $(document).ready( function () {
                     _token: _token
                 },
                 success: function(projects) {
-                    $('#projectList').fadeIn();
-                    $('#projectList').empty();
-                    projects.forEach((project) => {
-                        $('#projectList').append(`<div class="result-item">${project.name}</div>`);
-                    });
-
-
+                    if (projects.length != 0) {
+                        $('#projectList').fadeIn();
+                        $('#projectList').empty();
+                        projects.forEach((project) => {
+                            $('#projectList').append(`<div class="result-item">${project.name}</div>`);
+                        });
+                    }
                 },
                 error: function() {
                     console.log('Errore!');
