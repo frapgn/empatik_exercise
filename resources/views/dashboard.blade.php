@@ -77,7 +77,7 @@
                     <td> {{$login_credential->service->name}} </td>
                     <td> {{$login_credential->username}} </td>
                     <td class="td-password"> <span class="password">&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;</span> </td>
-                    <td> <button class="decrypt-password" type="button">View Password</button> </td>
+                    <td> <button class="decrypt-password" type="button">Show Password</button> </td>
                 </tr>
             @endforeach
         </tbody>

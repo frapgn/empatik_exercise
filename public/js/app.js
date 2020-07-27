@@ -49816,13 +49816,13 @@ $(document).ready(function () {
         $('#projectList').empty();
       }, 1000); // per essere sicuri
     }
-  }); // al click su un risultato inseriscilo nell'input e chiudi la lista dei risultati
+  }); // Al click su un risultato inseriscilo nell'input e chiudi la lista dei risultati
 
   $(document).on('click', '.result-item', function () {
     $('#project-input').val($(this).text()); // $('#projectList').fadeOut();
 
     $('#projectList').hide();
-  }); // chiudi la lista dei risultati quando si clicca all'esterno di essa
+  }); // Chiudi la lista dei risultati quando si clicca all'esterno di essa
 
   var specifiedElement = document.getElementById('project-input-container');
   document.addEventListener('click', function (event) {
@@ -49831,6 +49831,12 @@ $(document).ready(function () {
     if (!isClickInside) {
       // $('#projectList').fadeOut();
       $('#projectList').hide();
+    }
+  }); // Chiudi la lista dei risultati quando si preme il tasto Tab
+
+  document.addEventListener('keydown', function (event) {
+    if (event.keyCode == 9) {
+      document.querySelector('#projectList').style.display = "none";
     }
   }); // SHOW-HIDDEN PASWORD INPUT
 
