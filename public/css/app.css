@@ -11022,3 +11022,10 @@ a.text-dark:focus {
   color: red;
 }
 
+.decrypt-password {
+  border: none;
+  border-radius: 5px;
+  background-color: lightblue;
+  color: #000;
+}
+
