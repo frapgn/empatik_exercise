@@ -45,8 +45,8 @@ $(document).ready( function () {
         // paging: false
     });
 
-    // DECRYPT PASSWORD ON CLICK
-    $(document).on('click', '.decrypt-password', function() {
+    // SHOW/DECRYPT PASSWORD ON CLICK
+    $(document).on('click', '.show-password', function() {
 
         const id = $(this).parent().siblings('.td-id').text();
 
@@ -61,12 +61,21 @@ $(document).ready( function () {
             success: function(response) {
                 const password = response;
                 $(that).parent().siblings('.td-password').children('.password').text(password);
-
+                $(that).hide();
+                $(that).siblings('.hide-password').show();
             },
             error: function() {
                 console.log('Errore!');
             }
         });
+    });
+
+    // HIDE PASSWORD ON CLICK
+    $(document).on('click', '.hide-password', function() {
+        $(this).hide();
+        $(this).siblings('.show-password').show();
+        const hiddenPassword = '&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;';
+        $(this).parent().siblings('.td-password').children('.password').html(hiddenPassword);
     });
 
     // AUTOCOMPLETE

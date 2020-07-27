@@ -11018,10 +11018,18 @@ a.text-dark:focus {
   color: red;
 }
 
-.decrypt-password {
+.show-password {
   border: none;
   border-radius: 5px;
   background-color: lightblue;
+  color: #000;
+}
+
+.hide-password {
+  display: none;
+  border: none;
+  border-radius: 5px;
+  background-color: #ff7f50;
   color: #000;
 }
 

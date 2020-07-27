@@ -49761,9 +49761,9 @@ $(document).ready(function () {
     scrollX: true,
     scrollCollapse: true // paging: false
 
-  }); // DECRYPT PASSWORD ON CLICK
+  }); // SHOW/DECRYPT PASSWORD ON CLICK
 
-  $(document).on('click', '.decrypt-password', function () {
+  $(document).on('click', '.show-password', function () {
     var id = $(this).parent().siblings('.td-id').text();
     var that = $(this);
     $.ajax({
@@ -49775,11 +49775,20 @@ $(document).ready(function () {
       success: function success(response) {
         var password = response;
         $(that).parent().siblings('.td-password').children('.password').text(password);
+        $(that).hide();
+        $(that).siblings('.hide-password').show();
       },
       error: function error() {
         console.log('Errore!');
       }
     });
+  }); // HIDE PASSWORD ON CLICK
+
+  $(document).on('click', '.hide-password', function () {
+    $(this).hide();
+    $(this).siblings('.show-password').show();
+    var hiddenPassword = '&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;';
+    $(this).parent().siblings('.td-password').children('.password').html(hiddenPassword);
   }); // AUTOCOMPLETE
 
   $('#project-input').keyup(function () {
