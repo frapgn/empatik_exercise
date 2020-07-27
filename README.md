@@ -1,6 +1,7 @@
 DB Diagram: https://dbdiagram.io/d/5f1ae134e586385b4ff7cc76
 
-- 'Project' input autocomplete
+- 'Project' input autocomplete with jQuery
+- 'Service' input autocomplete with async function and fetch
 - Click on the eye icon -> Show / Hide input password
 - Used DataTables library for table rendering (https://www.datatables.net/)
 - Encrypted passwords in the DB
