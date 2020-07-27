@@ -10990,7 +10990,8 @@ a.text-dark:focus {
   display: none;
 }
 
-#projectList {
+#projectList,
+#serviceList {
   display: none;
   position: absolute;
   top: 41px;
@@ -11005,11 +11006,17 @@ a.text-dark:focus {
   box-shadow: 0 0 3px #ccc;
 }
 
-#projectList .result-item {
+#projectList .project-result-item,
+#projectList .service-result-item,
+#serviceList .project-result-item,
+#serviceList .service-result-item {
   padding: 5px 10px;
 }
 
-#projectList .result-item:hover {
+#projectList .project-result-item:hover,
+#projectList .service-result-item:hover,
+#serviceList .project-result-item:hover,
+#serviceList .service-result-item:hover {
   cursor: pointer;
   background-color: #c0c0c0;
 }

@@ -25,5 +25,6 @@ Route::middleware('auth')
     ->group(function () {
         Route::post('/', 'DashboardController@store')->name('dashboard.store');
         Route::get('/decrypt-password', 'DashboardController@decrypt_password');
-        Route::post('/autocomplete/fetch', 'AutocompleteController@fetch');
+        Route::post('/autocomplete/fetch_projects', 'AutocompleteController@fetch_projects');
+        Route::post('/autocomplete/fetch_services', 'AutocompleteController@fetch_services');
     });

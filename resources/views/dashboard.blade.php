@@ -14,8 +14,9 @@
         </div>
 
 
-        <div class="input-container">
-            <input type="text" name="service" placeholder="Service" value="{{old('service')}}">
+        <div class="input-container" id="service-input-container">
+            <input type="text" name="service" id="service-input" placeholder="Service" value="{{old('service')}}">
+            <div id="serviceList"></div>
             @error('service')
                 <div class="error-message">{{ $message }}</div>
             @enderror

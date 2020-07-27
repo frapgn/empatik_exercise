@@ -64,7 +64,8 @@
     display: none;
 }
 
-#projectList {
+#projectList,
+#serviceList {
     display: none;
     position: absolute;
     top: 41px;
@@ -79,10 +80,12 @@
     -moz-box-shadow: 0 0 3px #ccc;
     -webkit-box-shadow: 0 0 3px #ccc;
     box-shadow: 0 0 3px #ccc;
-    .result-item {
+    .project-result-item,
+    .service-result-item {
         padding: 5px 10px;
     }
-    .result-item:hover {
+    .project-result-item:hover,
+    .service-result-item:hover {
         cursor: pointer;
         background-color: #c0c0c0;
     }

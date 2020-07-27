@@ -78,14 +78,14 @@ $(document).ready( function () {
         $(this).parent().siblings('.td-password').children('.password').html(hiddenPassword);
     });
 
-    // AUTOCOMPLETE
+    // PROJECT INPUT AUTOCOMPLETE
     $('#project-input').keyup( function() {
         let query = $(this).val();
         if (query != '') {
 
             const _token = $('meta[name=csrf-token]').attr('content');
             $.ajax({
-                url: '/autocomplete/fetch',
+                url: '/autocomplete/fetch_projects',
                 method: 'POST',
                 data: {
                     query: query,
@@ -97,7 +97,7 @@ $(document).ready( function () {
                         $('#projectList').show();
                         $('#projectList').empty();
                         projects.forEach((project) => {
-                            $('#projectList').append(`<div class="result-item">${project.name}</div>`);
+                            $('#projectList').append(`<div class="project-result-item">${project.name}</div>`);
                         });
                     }
                 },
@@ -114,29 +114,80 @@ $(document).ready( function () {
     });
 
     // Al click su un risultato inseriscilo nell'input e chiudi la lista dei risultati
-    $(document).on('click', '.result-item', function() {
+    $(document).on('click', '.project-result-item', function() {
         $('#project-input').val($(this).text());
         // $('#projectList').fadeOut();
         $('#projectList').hide();
     });
 
     // Chiudi la lista dei risultati quando si clicca all'esterno di essa
-    var specifiedElement = document.getElementById('project-input-container');
+    const projectInputContainer = document.getElementById('project-input-container');
+    const serviceInputContainer = document.getElementById('service-input-container');
 
     document.addEventListener('click', function(event) {
-      var isClickInside = specifiedElement.contains(event.target);
+      let isClickInsideProject = projectInputContainer.contains(event.target);
+      let isClickInsideService = serviceInputContainer.contains(event.target);
 
-      if (!isClickInside) {
+      if (!isClickInsideProject) {
         // $('#projectList').fadeOut();
         $('#projectList').hide();
       }
+      if (!isClickInsideService) {
+        // $('#projectList').fadeOut();
+        $('#serviceList').hide();
+      }
+
     });
 
     // Chiudi la lista dei risultati quando si preme il tasto Tab
     document.addEventListener('keydown', function(event) {
         if (event.keyCode == 9) {
         document.querySelector('#projectList').style.display = "none";
+        document.querySelector('#serviceList').style.display = "none";
         }
+    });
+
+    // SERVICE INPUT AUTOCOMPLETE
+    $('#service-input').keyup( function() {
+        let query = $(this).val();
+        if (query != '') {
+
+            const _token = $('meta[name=csrf-token]').attr('content');
+
+            (async () => {
+                const rawResponse = await fetch('/autocomplete/fetch_services/', {
+                    method: 'POST',
+                    headers: {
+                      'Accept': 'application/json',
+                      'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        query: query,
+                        _token: _token
+                    })
+                });
+                const services = await rawResponse.json();
+
+                if (services.length != 0) {
+                    $('#serviceList').show();
+                    $('#serviceList').empty();
+                    services.forEach((service) => {
+                        $('#serviceList').append(`<div class="service-result-item">${service.name}</div>`);
+                    });
+                }
+            })();
+        } else {
+            // $('#projectList').fadeOut();
+            $('#serviceList').hide();
+            setTimeout(() => { $('#serviceList').empty() }, 1000); // per essere sicuri
+
+        }
+    });
+
+    $(document).on('click', '.service-result-item', function() {
+        $('#service-input').val($(this).text());
+        // $('#projectList').fadeOut();
+        $('#serviceList').hide();
     });
 
     // SHOW-HIDDEN PASWORD INPUT
