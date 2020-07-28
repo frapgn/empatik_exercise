@@ -50601,16 +50601,12 @@ $(document).ready(function () {
       });
     } else {
       // $('#projectList').fadeOut();
-      $('#projectList').hide();
-      setTimeout(function () {
-        $('#projectList').empty();
-      }, 1000); // per essere sicuri
+      $('#projectList').hide(); // setTimeout(() => { $('#projectList').empty() }, 1000); // per essere sicuri
     }
   }); // Al click su un risultato inseriscilo nell'input e chiudi la lista dei risultati
 
   $(document).on('click', '.project-result-item', function () {
-    $('#project-input').val($(this).text()); // $('#projectList').fadeOut();
-
+    $('#project-input').val($(this).text());
     $('#projectList').hide();
   }); // Chiudi la lista dei risultati quando si clicca all'esterno di essa
 
@@ -50621,12 +50617,10 @@ $(document).ready(function () {
     var isClickInsideService = serviceInputContainer.contains(event.target);
 
     if (!isClickInsideProject) {
-      // $('#projectList').fadeOut();
       $('#projectList').hide();
     }
 
     if (!isClickInsideService) {
-      // $('#projectList').fadeOut();
       $('#serviceList').hide();
     }
   }); // Chiudi la lista dei risultati quando si preme il tasto Tab
@@ -50688,10 +50682,7 @@ $(document).ready(function () {
       }))();
     } else {
       // $('#projectList').fadeOut();
-      $('#serviceList').hide();
-      setTimeout(function () {
-        $('#serviceList').empty();
-      }, 1000); // per essere sicuri
+      $('#serviceList').hide(); // setTimeout(() => { $('#serviceList').empty() }, 1000); // per essere sicuri
     }
   });
   $(document).on('click', '.service-result-item', function () {

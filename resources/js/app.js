@@ -108,7 +108,7 @@ $(document).ready( function () {
         } else {
             // $('#projectList').fadeOut();
             $('#projectList').hide();
-            setTimeout(() => { $('#projectList').empty() }, 1000); // per essere sicuri
+            // setTimeout(() => { $('#projectList').empty() }, 1000); // per essere sicuri
 
         }
     });
@@ -116,7 +116,6 @@ $(document).ready( function () {
     // Al click su un risultato inseriscilo nell'input e chiudi la lista dei risultati
     $(document).on('click', '.project-result-item', function() {
         $('#project-input').val($(this).text());
-        // $('#projectList').fadeOut();
         $('#projectList').hide();
     });
 
@@ -125,17 +124,15 @@ $(document).ready( function () {
     const serviceInputContainer = document.getElementById('service-input-container');
 
     document.addEventListener('click', function(event) {
-      let isClickInsideProject = projectInputContainer.contains(event.target);
-      let isClickInsideService = serviceInputContainer.contains(event.target);
+        let isClickInsideProject = projectInputContainer.contains(event.target);
+        let isClickInsideService = serviceInputContainer.contains(event.target);
 
-      if (!isClickInsideProject) {
-        // $('#projectList').fadeOut();
+        if (!isClickInsideProject) {
         $('#projectList').hide();
-      }
-      if (!isClickInsideService) {
-        // $('#projectList').fadeOut();
+        }
+        if (!isClickInsideService) {
         $('#serviceList').hide();
-      }
+        }
 
     });
 
@@ -179,7 +176,7 @@ $(document).ready( function () {
         } else {
             // $('#projectList').fadeOut();
             $('#serviceList').hide();
-            setTimeout(() => { $('#serviceList').empty() }, 1000); // per essere sicuri
+            // setTimeout(() => { $('#serviceList').empty() }, 1000); // per essere sicuri
 
         }
     });
